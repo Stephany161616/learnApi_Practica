@@ -4,9 +4,11 @@ import IntegracionBackFront.backfront.Config.Argon2.Argon2Password;
 import IntegracionBackFront.backfront.Entities.Users.UserEntity;
 import IntegracionBackFront.backfront.Repositories.Users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class AuthService {
     @Autowired
     private UserRepository repo;

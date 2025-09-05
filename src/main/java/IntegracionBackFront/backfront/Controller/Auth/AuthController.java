@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,16 +26,14 @@ public class AuthController {
     @Autowired
     private JWTUtils jwtUtils;
 
-    @RequestMapping("/login")
-    //hola
-    private ResponseEntity<String> login(@Valid @RequestBody UserDTO data , HttpServletResponse response){
-        if (data.getCorreo() = null || data.getCorreo().isBlank() ||
-            data.getContrasena() == null || data.getContrasena().isBlank()){
-            return  ResponseEntity.status(401).body("Error : credenciales incompletas");
-            }
-        if(service.Login(data.getCorreo(), data.getContrasena())){
-            addTokenCookie(response, data.getCorreo());
-            return ResponseEntity.ok("inicio de sesion exitoso");
+    @PostMapping("/login")
+    private ResponseEntity<String> login (@Valid @RequestBody UserDTO data, HttpServletResponse response){
+        if (data.getCorreo() == null || data.getCorreo().isBlank() ||
+                data.getContrasena() == null || data.getContrasena().isBlank()){
+            return ResponseEntity.status(401).body("Error: Credenciales incompletas");
+        }
+        if (service.Login(data.getCorreo(), data.getContrasena())){
+            return  ResponseEntity.ok ("Inicio de sesión exitoso");
         }
         return ResponseEntity.status(401).body("Credenciales incorrectas");
     }
