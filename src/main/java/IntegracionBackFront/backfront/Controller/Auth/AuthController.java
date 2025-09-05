@@ -48,7 +48,7 @@ public class AuthController {
                     user.getCorreo(),
                     user.getTipoUsuario().getNombreTipo() // ← Usar el nombre real del tipo
             );
-
+//hola
             Cookie cookie = new Cookie("authToken", token);
             cookie.setHttpOnly(true);
             cookie.setSecure(true);
@@ -58,3 +58,4 @@ public class AuthController {
         }
     }
 }
+//hola
